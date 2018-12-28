@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace TygaSoft.Model.DbTables
 {
     public class UsersInfo
@@ -11,6 +14,7 @@ namespace TygaSoft.Model.DbTables
         public string Password { get; set; }
         public int PasswordFormat { get; set; }
         public string PasswordSalt { get; set; }
+        public string Roles{get;set;}
 
     }
 }

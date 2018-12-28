@@ -4556,13 +4556,38 @@
           "TygaSoft.IRepositories": "1.0.0",
           "TygaSoft.IServices": "1.0.0",
           "TygaSoft.Model": "1.0.0",
-          "TygaSoft.Repositories": "1.0.0"
+          "TygaSoft.Repositories": "1.0.0",
+          "TygaSoft.SysUtility": "1.0.0"
         },
         "compile": {
           "bin/placeholder/TygaSoft.Services.dll": {}
         },
         "runtime": {
           "bin/placeholder/TygaSoft.Services.dll": {}
+        }
+      },
+      "TygaSoft.SysException/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/TygaSoft.SysException.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TygaSoft.SysException.dll": {}
+        }
+      },
+      "TygaSoft.SysUtility/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "dependencies": {
+          "TygaSoft.Model": "1.0.0",
+          "TygaSoft.SysException": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/TygaSoft.SysUtility.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/TygaSoft.SysUtility.dll": {}
         }
       }
     }
@@ -12230,6 +12255,16 @@
       "type": "project",
       "path": "../Services/TygaSoft.Services.csproj",
       "msbuildProject": "../Services/TygaSoft.Services.csproj"
+    },
+    "TygaSoft.SysException/1.0.0": {
+      "type": "project",
+      "path": "../SysException/TygaSoft.SysException.csproj",
+      "msbuildProject": "../SysException/TygaSoft.SysException.csproj"
+    },
+    "TygaSoft.SysUtility/1.0.0": {
+      "type": "project",
+      "path": "../SysUtility/TygaSoft.SysUtility.csproj",
+      "msbuildProject": "../SysUtility/TygaSoft.SysUtility.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -12242,7 +12277,8 @@
       "TygaSoft.IServices >= 1.0.0",
       "TygaSoft.Model >= 1.0.0",
       "TygaSoft.Repositories >= 1.0.0",
-      "TygaSoft.Services >= 1.0.0"
+      "TygaSoft.Services >= 1.0.0",
+      "TygaSoft.SysUtility >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -12287,6 +12323,9 @@
             },
             "/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Services/TygaSoft.Services.csproj": {
               "projectPath": "/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Services/TygaSoft.Services.csproj"
+            },
+            "/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/SysUtility/TygaSoft.SysUtility.csproj": {
+              "projectPath": "/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/SysUtility/TygaSoft.SysUtility.csproj"
             }
           }
         }

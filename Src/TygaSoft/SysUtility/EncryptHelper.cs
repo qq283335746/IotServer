@@ -10,7 +10,7 @@ namespace TygaSoft.SysUtility
     {
         public const PasswordFormatOptions DefaultPasswordFormat = PasswordFormatOptions.Clear;
 
-        public string EncodePassword(string pass, PasswordFormatOptions passwordFormat, string salt)
+        public static string EncodePassword(string pass, PasswordFormatOptions passwordFormat, string salt)
         {
             if (passwordFormat == PasswordFormatOptions.Clear) return pass;
 
@@ -87,7 +87,7 @@ namespace TygaSoft.SysUtility
         /// 生成随机字节值的强密码序列。
         /// </summary>
         /// <returns></returns>
-        public string GenerateSalt()
+        public static string GenerateSalt()
         {
             byte[] buf = new byte[16];
             using (var rng = RandomNumberGenerator.Create())
@@ -147,7 +147,7 @@ namespace TygaSoft.SysUtility
         /// </summary>
         /// <param name="passwordFormat"></param>
         /// <returns></returns>
-        private HashAlgorithm GetHashAlgorithm(PasswordFormatOptions passwordFormat)
+        private static HashAlgorithm GetHashAlgorithm(PasswordFormatOptions passwordFormat)
         {
             HashAlgorithm hashAlgo = null;
             switch (passwordFormat)

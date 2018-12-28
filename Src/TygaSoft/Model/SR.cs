@@ -24,7 +24,8 @@ namespace TygaSoft.Model
         public const string Response_Error = "调用失败！";
 
         public const string M_DataEmpty = "暂无数据！";
-        public const string M_InvalidError = "";
+        public const string M_InvalidError = "请求参数不正确！";
         public const string M_CanNotDecodeHashedPassword = "无法对该加密类型进行解密";
+        public const string M_LoginInvalidError="帐号或密码不正确！";
     }
 }

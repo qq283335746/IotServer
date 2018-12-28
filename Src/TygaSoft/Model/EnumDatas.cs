@@ -1,5 +1,9 @@
 namespace TygaSoft.Model
 {
+    public enum ApplicationOptions
+    {
+        None=100000
+    }
     public enum ResCodeOptions
     {
         Success = 1000,

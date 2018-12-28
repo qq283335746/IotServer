@@ -14,4 +14,11 @@ namespace TygaSoft.Model
     {
         public string Data { get; set; }
     }
+
+    public class LoginResult:Result
+    {
+        public string Token{get;set;}
+
+        public List<string> Roles{get;set;}
+    }
 }

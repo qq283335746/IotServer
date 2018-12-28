@@ -32,7 +32,8 @@
           "TygaSoft.IServices": "1.0.0",
           "TygaSoft.Model": "1.0.0",
           "TygaSoft.Repositories": "1.0.0",
-          "TygaSoft.Services": "1.0.0"
+          "TygaSoft.Services": "1.0.0",
+          "TygaSoft.SysUtility": "1.0.0"
         },
         "runtime": {
           "TygaSoft.Api.dll": {}
@@ -431,13 +432,34 @@
           "TygaSoft.IRepositories": "1.0.0",
           "TygaSoft.IServices": "1.0.0",
           "TygaSoft.Model": "1.0.0",
-          "TygaSoft.Repositories": "1.0.0"
+          "TygaSoft.Repositories": "1.0.0",
+          "TygaSoft.SysUtility": "1.0.0"
         },
         "runtime": {
           "TygaSoft.Services.dll": {}
         },
         "compile": {
           "TygaSoft.Services.dll": {}
+        }
+      },
+      "TygaSoft.SysException/1.0.0": {
+        "runtime": {
+          "TygaSoft.SysException.dll": {}
+        },
+        "compile": {
+          "TygaSoft.SysException.dll": {}
+        }
+      },
+      "TygaSoft.SysUtility/1.0.0": {
+        "dependencies": {
+          "TygaSoft.Model": "1.0.0",
+          "TygaSoft.SysException": "1.0.0"
+        },
+        "runtime": {
+          "TygaSoft.SysUtility.dll": {}
+        },
+        "compile": {
+          "TygaSoft.SysUtility.dll": {}
         }
       },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
@@ -3525,6 +3547,16 @@
       "sha512": ""
     },
     "TygaSoft.Services/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TygaSoft.SysException/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "TygaSoft.SysUtility/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

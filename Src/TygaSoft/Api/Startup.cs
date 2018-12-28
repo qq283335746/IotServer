@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Serialization;
+using TygaSoft.IRepositories;
 using TygaSoft.IServices;
 using TygaSoft.Repositories;
 using TygaSoft.Services;
@@ -35,6 +36,16 @@ namespace TygaSoft.Api
                 option.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
             });
             services.AddResponseCompression();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowDomain", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();
+                });
+            });
 
             var connection = Configuration.GetConnectionString("IotDb");
             services.AddDbContext<SqliteContext>(options => options.UseSqlite(connection,c => c.MigrationsAssembly("TygaSoft.Api")));
@@ -43,6 +54,7 @@ namespace TygaSoft.Api
             services.AddScoped<IHttpService, HttpService>();
             services.AddScoped<INetClientService, NetClientService>();
             services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

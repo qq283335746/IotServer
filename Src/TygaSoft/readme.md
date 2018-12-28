@@ -1,5 +1,8 @@
-IRepository
-
+EFCore+Sqlite:
+https://docs.microsoft.com/zh-cn/ef/core/get-started/aspnetcore/new-db?tabs=netcore-cli
+dotnet ef migrations add InitialCreate  --new db
+dotnet ef migrations add  --old db
+dotnet ef database update
 
 .net core cli:
 https://docs.microsoft.com/zh-cn/dotnet/core/tools/dotnet-run?tabs=netcore21

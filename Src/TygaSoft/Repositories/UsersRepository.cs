@@ -15,17 +15,29 @@ namespace TygaSoft.Repositories
             _context = context;
         }
 
-        public async Task<int> SaveUsers(UsersInfo usersInfo)
+        public UsersInfo GetUserInfo(int applicationId, string userName)
         {
-            if(usersInfo == null) return -1;
+            return _context.Users.FirstOrDefault(m => m.ApplicationId == applicationId && m.Name == userName);
+        }
 
-            Guid.TryParse(usersInfo.Id,out var gId);
-            if(gId.Equals(Guid.Empty)){
-                _context.Users.Add(usersInfo);
-            }
-            else{
-                _context.Users.Update(usersInfo);
-            }
+        public async Task<int> InsertAsync(UsersInfo userInfo)
+        {
+            _context.Users.Add(userInfo);
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<int> UpdateAsync(UsersInfo userInfo)
+        {
+            _context.Users.Update(userInfo);
+            return await _context.SaveChangesAsync();
+        }
+
+        public async Task<int> DeleteAsync(int applicationId, string userName)
+        {
+            var userInfo = _context.Users.FirstOrDefault(m => m.ApplicationId == applicationId && m.Name == userName);
+            if (userInfo == null) return -1;
+
+            _context.Users.Remove(userInfo);
 
             return await _context.SaveChangesAsync();
         }

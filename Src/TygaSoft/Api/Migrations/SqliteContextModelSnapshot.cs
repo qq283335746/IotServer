@@ -15,7 +15,7 @@ namespace TygaSoft.Api.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024");
 
-            modelBuilder.Entity("TygaSoft.Model.DbTables.Users", b =>
+            modelBuilder.Entity("TygaSoft.Model.DbTables.UsersInfo", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -33,6 +33,8 @@ namespace TygaSoft.Api.Migrations
                     b.Property<int>("PasswordFormat");
 
                     b.Property<string>("PasswordSalt");
+
+                    b.Property<string>("Roles");
 
                     b.Property<int>("_Id");
 

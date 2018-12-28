@@ -6,6 +6,9 @@ namespace TygaSoft.IRepositories
 {
     public interface IUsersRepository
     {
-        Task<int> SaveUsers(UsersInfo usersInfo);
+        UsersInfo GetUserInfo(int applicationId, string userName);
+        Task<int> InsertAsync(UsersInfo userInfo);
+        Task<int> UpdateAsync(UsersInfo userInfo);
+        Task<int> DeleteAsync(int applicationId, string userName);
     }
 }

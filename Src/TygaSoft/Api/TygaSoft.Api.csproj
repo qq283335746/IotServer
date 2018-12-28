@@ -19,5 +19,6 @@
     <ProjectReference Include="..\Services\TygaSoft.Services.csproj"/>
     <ProjectReference Include="..\IRepositories\TygaSoft.IRepositories.csproj"/>
     <ProjectReference Include="..\Repositories\TygaSoft.Repositories.csproj"/>
+    <ProjectReference Include="..\SysUtility\TygaSoft.SysUtility.csproj"/>
   </ItemGroup>
 </Project>

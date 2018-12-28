@@ -1,6 +1,5 @@
 using System;
 using Microsoft.EntityFrameworkCore;
-using TygaSoft.IRepositories;
 using TygaSoft.Model.DbTables;
 
 namespace TygaSoft.Repositories

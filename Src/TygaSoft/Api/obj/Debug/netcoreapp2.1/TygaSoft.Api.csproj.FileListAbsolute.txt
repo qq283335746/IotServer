@@ -44,3 +44,7 @@
 /home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Api/bin/Debug/netcoreapp2.1/TygaSoft.Repositories.dll
 /home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Api/bin/Debug/netcoreapp2.1/TygaSoft.IRepositories.pdb
 /home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Api/bin/Debug/netcoreapp2.1/TygaSoft.Repositories.pdb
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Api/bin/Debug/netcoreapp2.1/TygaSoft.SysException.dll
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Api/bin/Debug/netcoreapp2.1/TygaSoft.SysUtility.dll
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Api/bin/Debug/netcoreapp2.1/TygaSoft.SysException.pdb
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Api/bin/Debug/netcoreapp2.1/TygaSoft.SysUtility.pdb
