@@ -26,4 +26,9 @@ namespace TygaSoft.Model
     {
         public UserInfo UserInfo{get;set;}
     }
+
+    public class FindOrderResult:Result
+    {
+        public IEnumerable<OrderInfo> Orders{get;set;}
+    }
 }

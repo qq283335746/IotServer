@@ -6,9 +6,9 @@ namespace TygaSoft.SysUtility
 {
     public class SignHelper
     {
-        public static string EncodeToken(TokenInfo tokenInfo)
+        public static string EncodeToken(TokenInfo tokenInfo, string salt="Tu9vwcJ9Co/nLtOAJ+B87g==")
         {
-            return EncryptHelper.EncodePassword(JsonConvert.SerializeObject(tokenInfo), PasswordFormatOptions.Aes, "Tu9vwcJ9Co/nLtOAJ+B87g==");
+            return EncryptHelper.EncodePassword(JsonConvert.SerializeObject(tokenInfo), PasswordFormatOptions.Aes, salt);
         }
 
         public static TokenInfo UnEncodeToken(string token, string salt="Tu9vwcJ9Co/nLtOAJ+B87g==")

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,11 @@ namespace TygaSoft.Repositories
         public OrdersRepository(SqliteContext context)
         {
             _context = context;
+        }
+
+        public async Task<IEnumerable<OrdersInfo>> FindOrderRouterAsync(string orderCode)
+        {
+            return await _context.Orders.Where(m => m.OrderCode == orderCode || m.ParentOrderCode == orderCode).ToListAsync();
         }
 
         public async Task<OrdersInfo> GetOrderInfoAsync(int applicationId, string orderCode)
@@ -33,7 +39,7 @@ namespace TygaSoft.Repositories
 
         public async Task<int> InsertAsync(OrdersInfo model)
         {
-            if(string.IsNullOrEmpty(model.Id)) model.Id = Guid.NewGuid().ToString("N");
+            if (string.IsNullOrEmpty(model.Id)) model.Id = Guid.NewGuid().ToString("N");
             model.CreatedDate = DateTime.Now;
             model.LastUpdatedDate = model.CreatedDate;
             _context.Orders.Add(model);
@@ -68,7 +74,7 @@ namespace TygaSoft.Repositories
             // _context.Entry(model).Property("IpPlace").IsModified = true;
             // _context.Entry(model).Property("Pictures").IsModified = true;
             // _context.Entry(model).Property("Siblings").IsModified = true;
-            
+
             _context.Orders.Update(oldInfo);
             return await _context.SaveChangesAsync();
         }

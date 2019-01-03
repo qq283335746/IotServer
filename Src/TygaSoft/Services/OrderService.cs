@@ -59,12 +59,12 @@ namespace TygaSoft.Services
                         TransferItems = transferItems,
                         AddItems = new List<OrderAddItemInfo>()
                     };
-                    
+
                     isChanged = true;
                 }
                 else
                 {
-                    if (!mainOrderInfo.TransferItems.Any(m => m.OrderStatus == userOrderStatus && m.ByUserId==userId))
+                    if (!mainOrderInfo.TransferItems.Any(m => m.OrderStatus == userOrderStatus && m.ByUserId == userId))
                     {
                         transferItems.Add(transferInfo);
                         isChanged = true;
@@ -78,7 +78,7 @@ namespace TygaSoft.Services
                 {
                     throw new ArgumentException(SR.M_InvalidError);
                 }
-                if (!mainOrderInfo.TransferItems.Any(m => m.OrderStatus == userOrderStatus && m.ByUserId==userId))
+                if (!mainOrderInfo.TransferItems.Any(m => m.OrderStatus == userOrderStatus && m.ByUserId == userId))
                 {
                     transferItems.Add(transferInfo);
                     mainOrderInfo.TransferItems = transferItems;
@@ -109,24 +109,34 @@ namespace TygaSoft.Services
             return OrderStatusOptions.None;
         }
 
+        public async Task<IEnumerable<OrderInfo>> FindOrderRouterAsync(string orderCode)
+        {
+            var datas = new List<OrderInfo>();
+
+            var orders = await _ordersRepository.FindOrderRouterAsync(orderCode);
+            if (orders == null) return datas;
+
+            foreach (var item in orders)
+            {
+                datas.Add(DtoOrderInfo(item));
+            }
+
+            return datas;
+        }
+
         public async Task<OrderInfo> GetOrderInfoAsync(int applicationId, string orderCode)
         {
             var ordersInfo = await _ordersRepository.GetOrderInfoAsync(applicationId, orderCode);
             if (ordersInfo == null) return null;
-            var orderInfo = _dtoMapper.TMapper<OrderInfo>(ordersInfo);
-            orderInfo.TransferItems = JsonConvert.DeserializeObject<IEnumerable<OrderTransferInfo>>(ordersInfo.TransferItems);
-            orderInfo.AddItems = JsonConvert.DeserializeObject<IEnumerable<OrderAddItemInfo>>(ordersInfo.AddItems);
 
-            return orderInfo;
+            return DtoOrderInfo(ordersInfo);
         }
 
         public async Task<int> SaveOrderAsync(OrderInfo model)
         {
             var effect = -1;
-            var ordersInfo = _dtoMapper.TMapper<OrdersInfo>(model);
-            ordersInfo.TransferItems = JsonConvert.SerializeObject(model.TransferItems);
-            ordersInfo.AddItems = JsonConvert.SerializeObject(model.AddItems);
-
+            var ordersInfo = OtdOrderInfo(model);
+            
             if (Guid.TryParse(model.OrderId, out var gId) && !gId.Equals(Guid.Empty))
             {
                 effect = await _ordersRepository.UpdateAsync(ordersInfo);
@@ -210,6 +220,24 @@ namespace TygaSoft.Services
             if (oldUserInfo == null) return -1;
 
             return await _usersRepository.DeleteAsync(oldUserInfo.ApplicationId, oldUserInfo.Name);
+        }
+
+        private OrderInfo DtoOrderInfo(OrdersInfo d)
+        {
+            var orderInfo = _dtoMapper.TMapper<OrderInfo>(d);
+            orderInfo.TransferItems = JsonConvert.DeserializeObject<IEnumerable<OrderTransferInfo>>(d.TransferItems);
+            orderInfo.AddItems = JsonConvert.DeserializeObject<IEnumerable<OrderAddItemInfo>>(d.AddItems);
+
+            return orderInfo;
+        }
+
+        private OrdersInfo OtdOrderInfo(OrderInfo o)
+        {
+            var ordersInfo = _dtoMapper.TMapper<OrdersInfo>(o);
+            ordersInfo.TransferItems = JsonConvert.SerializeObject(o.TransferItems);
+            ordersInfo.AddItems = JsonConvert.SerializeObject(o.AddItems);
+
+            return ordersInfo;
         }
     }
 }

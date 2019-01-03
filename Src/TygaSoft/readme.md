@@ -52,3 +52,6 @@ dotnet add ./Repositories/TygaSoft.Repositories.csproj reference ./IRepositories
 
 dotnet build
 dotnet run --project ./CATest/TygaSoft.CATest.csproj
+
+getpostman：
+https://learning.getpostman.com/docs/postman/launching_postman/installation_and_updates/#linux

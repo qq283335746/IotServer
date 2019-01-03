@@ -56,6 +56,28 @@ namespace TygaSoft.Api.Controllers
 
         }
 
+        public async Task<FindOrderResult> FindOrderRouterAsync([FromBody]FindOrderRequestInfo requestInfo)
+        {
+            try
+            {
+                if (requestInfo == null) return new FindOrderResult { ResCode = ResCodeOptions.Error, Message = SR.M_InvalidError };
+
+                var tokenInfo = SignHelper.UnEncodeToken(requestInfo.Token);
+                if (tokenInfo == null || requestInfo.AppId != tokenInfo.AppId)
+                {
+                    return new FindOrderResult { ResCode = ResCodeOptions.TokenInvalidError, Message = SR.M_LoginRedirect };
+                }
+
+                var orders = await _orderService.FindOrderRouterAsync(requestInfo.OrderCode);
+
+                return new FindOrderResult { ResCode = ResCodeOptions.Success, Message = SR.Response_Ok,Orders=orders };
+            }
+            catch (Exception ex)
+            {
+                return new FindOrderResult { ResCode = ResCodeOptions.Error, Message = ex.Message };
+            }
+        }
+
         [HttpPost]
         public async Task<Result> SaveOrderAsync([FromBody]OrderRequestInfo requestInfo)
         {
@@ -91,7 +113,7 @@ namespace TygaSoft.Api.Controllers
                 string latlngPlace = string.Empty;
                 string ip = string.Empty;
                 string ipPlace = string.Empty;
-                IEnumerable<string> pictures=null;    //待处理
+                IEnumerable<string> pictures = null;    //待处理
 
                 if (requestInfo.FunFlag == FunFlagOptions.Orders.ToString() || requestInfo.FunFlag == FunFlagOptions.OrderPackages.ToString())
                 {
@@ -105,7 +127,7 @@ namespace TygaSoft.Api.Controllers
                     return new Result { ResCode = ResCodeOptions.Error, Message = SR.M_InvalidError };
                 }
 
-                var oldMainOrderInfo = await _orderService.DoMainOrderInfoAsync(tokenInfo.AppId, tokenInfo.UserId,userInfo.UserName, userOrderStatus, orderCode, parentOrderCode,pictures,latlng,latlngPlace,ip,ipPlace);
+                var oldMainOrderInfo = await _orderService.DoMainOrderInfoAsync(tokenInfo.AppId, tokenInfo.UserId, userInfo.UserName, userOrderStatus, orderCode, parentOrderCode, pictures, latlng, latlngPlace, ip, ipPlace);
                 var isMainOrderChanged = false;
 
                 if (requestInfo.FunFlag == FunFlagOptions.Orders.ToString())
@@ -115,7 +137,7 @@ namespace TygaSoft.Api.Controllers
                         if (!oldMainOrderInfo.AddItems.Any(m => m.OrderCode == orderCode && m.ByUserId == tokenInfo.UserId))
                         {
                             var siblings = oldMainOrderInfo.AddItems.ToList();
-                            siblings.Add(new OrderAddItemInfo {ByUserId=userInfo.UserId,ByUserName=userInfo.UserName, OrderCode = orderCode, OrderStatus = userOrderStatus, Latlng = latlng, LatlngPlace = latlngPlace, Ip = ip, IpPlace = ipPlace });
+                            siblings.Add(new OrderAddItemInfo { ByUserId = userInfo.UserId, ByUserName = userInfo.UserName, OrderCode = orderCode, OrderStatus = userOrderStatus, Latlng = latlng, LatlngPlace = latlngPlace, Ip = ip, IpPlace = ipPlace });
                             oldMainOrderInfo.AddItems = siblings;
                             isMainOrderChanged = true;
                         }

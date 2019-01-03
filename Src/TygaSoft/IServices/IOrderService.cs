@@ -14,6 +14,8 @@ namespace TygaSoft.IServices
 
         OrderStatusOptions GetOrderStatus(IEnumerable<string> Roles);
 
+        Task<IEnumerable<OrderInfo>> FindOrderRouterAsync(string orderCode);
+
         Task<OrderInfo> GetOrderInfoAsync(int applicationId, string orderCode);
 
         Task<int> SaveOrderAsync(OrderInfo model);
