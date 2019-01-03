@@ -1,13 +1,26 @@
 using System;
+using Newtonsoft.Json;
+using TygaSoft.Model;
 
 namespace TygaSoft.SysUtility
 {
     public class SignHelper
     {
+        public static string EncodeToken(TokenInfo tokenInfo)
+        {
+            return EncryptHelper.EncodePassword(JsonConvert.SerializeObject(tokenInfo), PasswordFormatOptions.Aes, "Tu9vwcJ9Co/nLtOAJ+B87g==");
+        }
+
+        public static TokenInfo UnEncodeToken(string token, string salt="Tu9vwcJ9Co/nLtOAJ+B87g==")
+        {
+            return EncryptHelper.UnEncodePassword(token, PasswordFormatOptions.Aes, salt).ToModel<TokenInfo>();
+        }
+
+
         public static DateTime ConvertLongToDateTime(long ticks, int secondsOrMilliseconds = 1)
         {
             var startTime = new DateTime(1970, 1, 1, 0, 0, 0);
-            return startTime.Add(new TimeSpan(ticks*TimeSpan.TicksPerMillisecond));
+            return startTime.Add(new TimeSpan(ticks * TimeSpan.TicksPerMillisecond));
             // return startTime.AddMilliseconds(ticks).ToLocalTime();
             //long beginTicks = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).ToUniversalTime().Ticks;
             //return new DateTime((ticks*10000+beginTicks)); 

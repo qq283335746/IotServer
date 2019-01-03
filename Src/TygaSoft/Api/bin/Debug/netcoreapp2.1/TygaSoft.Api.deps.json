@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.1",
-    "signature": "d02ea41c1559302cf9347658c5a1df016e2dd8c5"
+    "signature": "3f0972ca108a3839e8dcabd8a74ca2716f3d5005"
   },
   "compilationOptions": {
     "defines": [
@@ -40,6 +40,21 @@
         },
         "compile": {
           "TygaSoft.Api.dll": {}
+        }
+      },
+      "AutoMapper/8.0.0": {
+        "dependencies": {
+          "Microsoft.CSharp": "4.5.0",
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/AutoMapper.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/AutoMapper.dll": {}
         }
       },
       "Microsoft.Data.Sqlite.Core/2.1.0": {
@@ -402,6 +417,8 @@
       },
       "TygaSoft.Model/1.0.0": {
         "dependencies": {
+          "AutoMapper": "8.0.0",
+          "Microsoft.Extensions.DependencyInjection": "2.1.1",
           "Newtonsoft.Json": "12.0.1"
         },
         "runtime": {
@@ -452,6 +469,7 @@
       },
       "TygaSoft.SysUtility/1.0.0": {
         "dependencies": {
+          "Newtonsoft.Json": "12.0.1",
           "TygaSoft.Model": "1.0.0",
           "TygaSoft.SysException": "1.0.0"
         },
@@ -3406,6 +3424,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AutoMapper/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kcbje0Y71XkvzPn8k6OROZGOn2SKaWimon3Bu1WUTVoV5GTJVym+k+zQuKApyyFVRfk7bisumj/qUX4xIIXS+Q==",
+      "path": "automapper/8.0.0",
+      "hashPath": "automapper.8.0.0.nupkg.sha512"
     },
     "Microsoft.Data.Sqlite.Core/2.1.0": {
       "type": "package",

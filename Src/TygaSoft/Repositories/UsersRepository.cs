@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using TygaSoft.IRepositories;
 using TygaSoft.Model.DbTables;
 
@@ -8,37 +9,50 @@ namespace TygaSoft.Repositories
 {
     public class UsersRepository : IUsersRepository
     {
-        private SqliteContext _context;
+        private readonly SqliteContext _context;
 
         public UsersRepository(SqliteContext context)
         {
             _context = context;
         }
 
-        public UsersInfo GetUserInfo(int applicationId, string userName)
+        public async Task<UsersInfo> GetUserInfoAsync(int applicationId, string name)
         {
-            return _context.Users.FirstOrDefault(m => m.ApplicationId == applicationId && m.Name == userName);
+            if (Guid.TryParse(name, out var userId))
+            {
+                return await _context.Users.SingleOrDefaultAsync(m => m.ApplicationId == applicationId && m.Id == name);
+            }
+            return await _context.Users.SingleOrDefaultAsync(m => m.ApplicationId == applicationId && m.Name == name);
         }
 
-        public async Task<int> InsertAsync(UsersInfo userInfo)
+        public async Task<int> DeleteAsync(int applicationId, string name)
         {
-            _context.Users.Add(userInfo);
+            UsersInfo oldInfo = null;
+            if (Guid.TryParse(name, out var userId))
+            {
+                oldInfo = await _context.Users.SingleOrDefaultAsync(m => m.ApplicationId == applicationId && m.Id == name);
+            }
+            else
+            {
+                oldInfo = await _context.Users.SingleOrDefaultAsync(m => m.ApplicationId == applicationId && m.Name == name);
+            }
+
+            if (oldInfo == null) return -1;
+
+            _context.Users.Remove(oldInfo);
+
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<int> UpdateAsync(UsersInfo userInfo)
+        public async Task<int> InsertAsync(UsersInfo model)
         {
-            _context.Users.Update(userInfo);
+            _context.Users.Add(model);
             return await _context.SaveChangesAsync();
         }
 
-        public async Task<int> DeleteAsync(int applicationId, string userName)
+        public async Task<int> UpdateAsync(UsersInfo model)
         {
-            var userInfo = _context.Users.FirstOrDefault(m => m.ApplicationId == applicationId && m.Name == userName);
-            if (userInfo == null) return -1;
-
-            _context.Users.Remove(userInfo);
-
+            _context.Users.Update(model);
             return await _context.SaveChangesAsync();
         }
     }

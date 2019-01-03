@@ -27,5 +27,8 @@ namespace TygaSoft.Model
         public const string M_InvalidError = "请求参数不正确！";
         public const string M_CanNotDecodeHashedPassword = "无法对该加密类型进行解密";
         public const string M_LoginInvalidError="帐号或密码不正确！";
+        public const string M_LoginRedirect="请先登录！";
+        public const string M_LoginUserNoAccess="当前操作用户无权限，请联系管理员！";
+        public const string M_LoginNotExist="当前用户不存在或已被删除！";
     }
 }

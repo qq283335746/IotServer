@@ -1,7 +1,15 @@
+
+Source Local Dir:
+/home/tygasoft/Tyga/GitHub/IotServer
+/home/tygasoft/Tyga/GitHub/IotClient
+
 EFCore+Sqlite:
 https://docs.microsoft.com/zh-cn/ef/core/get-started/aspnetcore/new-db?tabs=netcore-cli
 dotnet ef migrations add InitialCreate  --new db
-dotnet ef migrations add  --old db
+dotnet ef migrations add AddProductReviews  --自动迁移
+dotnet ef migrations remove
+dotnet ef migrations add Users  --old db
+dotnet ef migrations add Orders 
 dotnet ef database update
 
 .net core cli:

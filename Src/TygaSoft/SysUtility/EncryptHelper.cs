@@ -69,7 +69,7 @@ namespace TygaSoft.SysUtility
             }
         }
 
-        public string UnEncodePassword(string pass, PasswordFormatOptions passwordFormat, string salt)
+        public static string UnEncodePassword(string pass, PasswordFormatOptions passwordFormat, string salt)
         {
             switch (passwordFormat)
             {

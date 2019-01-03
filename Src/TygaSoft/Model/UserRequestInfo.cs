@@ -5,7 +5,6 @@ namespace TygaSoft.Model
 {
     public class UserRequestInfo : RequestBaseInfo
     {
-        public int ApplicationId { get; set; }
         public string UserId { get; set; }
         public string UserName { get; set; }
         public string MobilePhone { get; set; }

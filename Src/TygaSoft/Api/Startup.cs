@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json.Serialization;
 using TygaSoft.IRepositories;
 using TygaSoft.IServices;
+using TygaSoft.Model;
 using TygaSoft.Repositories;
 using TygaSoft.Services;
 
@@ -55,6 +56,9 @@ namespace TygaSoft.Api
             services.AddScoped<INetClientService, NetClientService>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<IOrdersRepository, OrdersRepository>();
+
+            services.AddAutoMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
