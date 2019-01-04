@@ -10,7 +10,7 @@ namespace TygaSoft.IServices
     {
         #region Orders
 
-        Task<OrderInfo> DoMainOrderInfoAsync(int appId, string userId, string userName, OrderStatusOptions userOrderStatus, string orderCode, string parentOrderCode, IEnumerable<string> pictures, string latlng, string latlngPlace, string ip, string ipPlace);
+        Task<OrderInfo> DoMainOrderInfoAsync(int appId, string userId, string userName, OrderStatusOptions userOrderStatus, string orderCode, string parentOrderCode,string remark, IEnumerable<string> pictures, string latlng, string latlngPlace, string ip, string ipPlace);
 
         OrderStatusOptions GetOrderStatus(IEnumerable<string> Roles);
 

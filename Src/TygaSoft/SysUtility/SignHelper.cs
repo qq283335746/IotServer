@@ -6,14 +6,28 @@ namespace TygaSoft.SysUtility
 {
     public class SignHelper
     {
-        public static string EncodeToken(TokenInfo tokenInfo, string salt="Tu9vwcJ9Co/nLtOAJ+B87g==")
+        public static string EncodeToken(TokenInfo tokenInfo, string salt = "Tu9vwcJ9Co/nLtOAJ+B87g==")
         {
-            return EncryptHelper.EncodePassword(JsonConvert.SerializeObject(tokenInfo), PasswordFormatOptions.Aes, salt);
+            try
+            {
+                return EncryptHelper.EncodePassword(JsonConvert.SerializeObject(tokenInfo), PasswordFormatOptions.Aes, salt);
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
 
-        public static TokenInfo UnEncodeToken(string token, string salt="Tu9vwcJ9Co/nLtOAJ+B87g==")
+        public static TokenInfo UnEncodeToken(string token, string salt = "Tu9vwcJ9Co/nLtOAJ+B87g==")
         {
-            return EncryptHelper.UnEncodePassword(token, PasswordFormatOptions.Aes, salt).ToModel<TokenInfo>();
+            try
+            {
+                return EncryptHelper.UnEncodePassword(token, PasswordFormatOptions.Aes, salt).ToModel<TokenInfo>();
+            }
+            catch
+            {
+                return null;
+            }
         }
 
 

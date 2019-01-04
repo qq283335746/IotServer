@@ -1,4 +1,0 @@
-/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Repositories/obj/Debug/netcoreapp2.1/TygaSoft.Repositories.csprojAssemblyReference.cache
-/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Repositories/obj/Debug/netcoreapp2.1/TygaSoft.Repositories.csproj.CoreCompileInputs.cache
-/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Repositories/obj/Debug/netcoreapp2.1/TygaSoft.Repositories.AssemblyInfoInputs.cache
-/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Repositories/obj/Debug/netcoreapp2.1/TygaSoft.Repositories.AssemblyInfo.cs

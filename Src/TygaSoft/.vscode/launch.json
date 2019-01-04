@@ -9,7 +9,7 @@
            "type": "coreclr",
            "request": "launch",
            "preLaunchTask": "build",
-           "program": "${workspaceFolder}/CATest/bin/Debug/netcoreapp2.1/TygaSoft.CATest.dll",
+           "program": "${workspaceFolder}/CATest/bin/Debug/netcoreapp2.2/TygaSoft.CATest.dll",
            "args": [],
            "cwd": "${workspaceFolder}",
            "stopAtEntry": false,
@@ -21,7 +21,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/Api/bin/Debug/netcoreapp2.1/TygaSoft.Api.dll",
+            "program": "${workspaceFolder}/Api/bin/Debug/netcoreapp2.2/TygaSoft.Api.dll",
             "args": [],
             "cwd": "${workspaceFolder}/Api",
             "stopAtEntry": false,

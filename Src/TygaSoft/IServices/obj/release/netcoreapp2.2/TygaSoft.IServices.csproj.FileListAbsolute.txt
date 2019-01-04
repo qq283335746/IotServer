@@ -1,0 +1,12 @@
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/IServices/bin/release/netcoreapp2.2/TygaSoft.IServices.deps.json
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/IServices/bin/release/netcoreapp2.2/TygaSoft.IServices.dll
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/IServices/bin/release/netcoreapp2.2/TygaSoft.IServices.pdb
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/IServices/bin/release/netcoreapp2.2/TygaSoft.Model.dll
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/IServices/bin/release/netcoreapp2.2/TygaSoft.Model.pdb
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/IServices/obj/release/netcoreapp2.2/TygaSoft.IServices.csprojAssemblyReference.cache
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/IServices/obj/release/netcoreapp2.2/TygaSoft.IServices.csproj.CoreCompileInputs.cache
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/IServices/obj/release/netcoreapp2.2/TygaSoft.IServices.AssemblyInfoInputs.cache
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/IServices/obj/release/netcoreapp2.2/TygaSoft.IServices.AssemblyInfo.cs
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/IServices/obj/release/netcoreapp2.2/TygaSoft.IServices.csproj.CopyComplete
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/IServices/obj/release/netcoreapp2.2/TygaSoft.IServices.dll
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/IServices/obj/release/netcoreapp2.2/TygaSoft.IServices.pdb

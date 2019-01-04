@@ -25,7 +25,7 @@ namespace TygaSoft.Services
             _dtoMapper = dtoMapper;
         }
 
-        public async Task<OrderInfo> DoMainOrderInfoAsync(int appId, string userId, string userName, OrderStatusOptions userOrderStatus, string orderCode, string parentOrderCode, IEnumerable<string> pictures, string latlng, string latlngPlace, string ip, string ipPlace)
+        public async Task<OrderInfo> DoMainOrderInfoAsync(int appId, string userId, string userName, OrderStatusOptions userOrderStatus, string orderCode, string parentOrderCode,string remark, IEnumerable<string> pictures, string latlng, string latlngPlace, string ip, string ipPlace)
         {
             OrderInfo mainOrderInfo = null;
             var isChanged = false;
@@ -34,12 +34,14 @@ namespace TygaSoft.Services
             {
                 ByUserId = userId,
                 ByUserName = userName,
+                Remark=remark,
                 OrderStatus = userOrderStatus,
                 Pictures = pictures == null ? new List<string>() : pictures,
                 Latlng = latlng,
                 LatlngPlace = latlngPlace,
                 Ip = ip,
-                IpPlace = ipPlace
+                IpPlace = ipPlace,
+                LastUpdatedTime=DateTime.Now
             };
 
             var transferItems = new List<OrderTransferInfo>();

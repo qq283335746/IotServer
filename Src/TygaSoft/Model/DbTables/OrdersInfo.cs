@@ -15,6 +15,7 @@ namespace TygaSoft.Model.DbTables
 
         //对应IEnumerable<OrderAddItemInfo> AddItems
         public string AddItems { get; set; }
+        
         public DateTime CreatedDate { get; set; }
         public DateTime LastUpdatedDate { get; set; }
     }

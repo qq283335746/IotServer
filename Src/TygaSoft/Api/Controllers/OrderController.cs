@@ -94,7 +94,7 @@ namespace TygaSoft.Api.Controllers
                 var userInfo = await _orderService.GetUserInfoAsync(tokenInfo.AppId, tokenInfo.UserId);
                 if (userInfo == null)
                 {
-                    return new Result { ResCode = ResCodeOptions.Error, Message = SR.M_LoginNotExist };
+                    return new Result { ResCode = ResCodeOptions.TokenInvalidError, Message = SR.M_LoginRedirect };
                 }
                 var userOrderStatus = _orderService.GetOrderStatus(userInfo.Roles);
                 if (userOrderStatus == OrderStatusOptions.None)
@@ -109,6 +109,7 @@ namespace TygaSoft.Api.Controllers
 
                 string orderCode = string.Empty;
                 string parentOrderCode = string.Empty;
+                string remark = string.Empty;
                 string latlng = string.Empty;
                 string latlngPlace = string.Empty;
                 string ip = string.Empty;
@@ -120,6 +121,7 @@ namespace TygaSoft.Api.Controllers
                     var jobj = JObject.Parse(requestInfo.Data);
                     orderCode = jobj["OrderCode"].ToString();
                     parentOrderCode = jobj["ParentOrderCode"].ToString();
+                    remark = jobj["Remark"].ToString();
                 }
 
                 if (string.IsNullOrEmpty(orderCode) && string.IsNullOrEmpty(parentOrderCode))
@@ -127,7 +129,7 @@ namespace TygaSoft.Api.Controllers
                     return new Result { ResCode = ResCodeOptions.Error, Message = SR.M_InvalidError };
                 }
 
-                var oldMainOrderInfo = await _orderService.DoMainOrderInfoAsync(tokenInfo.AppId, tokenInfo.UserId, userInfo.UserName, userOrderStatus, orderCode, parentOrderCode, pictures, latlng, latlngPlace, ip, ipPlace);
+                var oldMainOrderInfo = await _orderService.DoMainOrderInfoAsync(tokenInfo.AppId, tokenInfo.UserId, userInfo.UserName, userOrderStatus, orderCode, parentOrderCode,remark, pictures, latlng, latlngPlace, ip, ipPlace);
                 var isMainOrderChanged = false;
 
                 if (requestInfo.FunFlag == FunFlagOptions.Orders.ToString())
