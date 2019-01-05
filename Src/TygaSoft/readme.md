@@ -7,6 +7,9 @@ Source Local Dir:
 使用 IIS 在 Windows 上托管 ASP.NET Core：
 https://docs.microsoft.com/zh-cn/aspnet/core/host-and-deploy/iis/index?view=aspnetcore-2.1 （关键：当前 .NET Core 托管捆绑包安装程序（直接下载））
 
+Sqlite:
+Rowid,INTEGER PRIMARY KEY AUTOINCREMENT
+
 EFCore+Sqlite:
 https://docs.microsoft.com/zh-cn/ef/core/get-started/aspnetcore/new-db?tabs=netcore-cli
 

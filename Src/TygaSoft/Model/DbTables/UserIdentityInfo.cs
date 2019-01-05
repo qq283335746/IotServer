@@ -4,7 +4,6 @@ namespace TygaSoft.Model.DbTables
 {
     public class UserIdentityInfo
     {
-        public int _Id { get; set; }
         public int ApplicationId { get; set; }
         public string UserId{get;set;}
         public string Token{get;set;}

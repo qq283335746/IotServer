@@ -15,20 +15,20 @@ namespace TygaSoft.Model
         public string Data { get; set; }
     }
 
-    public class LoginResult:Result
+    public class LoginResult : Result
     {
-        public string Token{get;set;}
+        public string Token { get; set; }
 
-        public IEnumerable<string> Roles{get;set;}
+        public IEnumerable<string> Roles { get; set; }
     }
 
-    public class  UsersResult:Result
+    public class UsersResult : Result
     {
-        public UserInfo UserInfo{get;set;}
+        public UserInfo UserInfo { get; set; }
     }
 
-    public class FindOrderResult:Result
+    public class FindOrderResult : Result
     {
-        public IEnumerable<OrderInfo> Orders{get;set;}
+        public IEnumerable<OrderInfo> Orders { get; set; }
     }
 }

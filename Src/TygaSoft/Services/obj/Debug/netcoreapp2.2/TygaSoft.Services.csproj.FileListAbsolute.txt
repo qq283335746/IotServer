@@ -1,3 +1,7 @@
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Services/obj/Debug/netcoreapp2.2/TygaSoft.Services.csprojAssemblyReference.cache
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Services/obj/Debug/netcoreapp2.2/TygaSoft.Services.csproj.CoreCompileInputs.cache
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Services/obj/Debug/netcoreapp2.2/TygaSoft.Services.AssemblyInfoInputs.cache
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Services/obj/Debug/netcoreapp2.2/TygaSoft.Services.AssemblyInfo.cs
 /home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Services/bin/Debug/netcoreapp2.2/TygaSoft.Services.deps.json
 /home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Services/bin/Debug/netcoreapp2.2/TygaSoft.Services.dll
 /home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Services/bin/Debug/netcoreapp2.2/TygaSoft.Services.pdb
@@ -13,10 +17,6 @@
 /home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Services/bin/Debug/netcoreapp2.2/TygaSoft.Repositories.pdb
 /home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Services/bin/Debug/netcoreapp2.2/TygaSoft.SysUtility.pdb
 /home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Services/bin/Debug/netcoreapp2.2/TygaSoft.SysException.pdb
-/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Services/obj/Debug/netcoreapp2.2/TygaSoft.Services.csprojAssemblyReference.cache
-/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Services/obj/Debug/netcoreapp2.2/TygaSoft.Services.csproj.CoreCompileInputs.cache
-/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Services/obj/Debug/netcoreapp2.2/TygaSoft.Services.AssemblyInfoInputs.cache
-/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Services/obj/Debug/netcoreapp2.2/TygaSoft.Services.AssemblyInfo.cs
 /home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Services/obj/Debug/netcoreapp2.2/TygaSoft.Services.csproj.CopyComplete
 /home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Services/obj/Debug/netcoreapp2.2/TygaSoft.Services.dll
 /home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/Services/obj/Debug/netcoreapp2.2/TygaSoft.Services.pdb

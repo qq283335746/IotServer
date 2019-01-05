@@ -70,7 +70,7 @@ namespace TygaSoft.Api.Controllers
 
                 var orders = await _orderService.FindOrderRouterAsync(requestInfo.OrderCode);
 
-                return new FindOrderResult { ResCode = ResCodeOptions.Success, Message = SR.Response_Ok,Orders=orders };
+                return new FindOrderResult { ResCode = ResCodeOptions.Success, Message = SR.Response_Ok, Orders = orders };
             }
             catch (Exception ex)
             {
@@ -102,14 +102,15 @@ namespace TygaSoft.Api.Controllers
                     return new Result { ResCode = ResCodeOptions.Error, Message = SR.M_LoginUserNoAccess };
                 }
 
-                var exchanges = new OrderAddItemInfo
-                {
-                    OrderStatus = userOrderStatus
-                };
+                // var exchanges = new OrderAddItemInfo
+                // {
+                //     OrderStatus = userOrderStatus
+                // };
 
                 string orderCode = string.Empty;
                 string parentOrderCode = string.Empty;
                 string remark = string.Empty;
+                string batchRandomCode = string.Empty;
                 string latlng = string.Empty;
                 string latlngPlace = string.Empty;
                 string ip = string.Empty;
@@ -120,27 +121,31 @@ namespace TygaSoft.Api.Controllers
                 {
                     var jobj = JObject.Parse(requestInfo.Data);
                     orderCode = jobj["OrderCode"].ToString();
-                    parentOrderCode = jobj["ParentOrderCode"].ToString();
-                    remark = jobj["Remark"].ToString();
+                    parentOrderCode = jobj.ContainsKey("ParentOrderCode") ? jobj["ParentOrderCode"].ToString():string.Empty;
+                    remark = jobj.ContainsKey("Remark") ? jobj["Remark"].ToString():string.Empty;
+                    batchRandomCode = jobj.ContainsKey("BatchRandomCode") ? jobj["BatchRandomCode"].ToString():string.Empty;
                 }
 
-                if (string.IsNullOrEmpty(orderCode) && string.IsNullOrEmpty(parentOrderCode))
+                if (string.IsNullOrEmpty(batchRandomCode) || (string.IsNullOrEmpty(orderCode) && string.IsNullOrEmpty(parentOrderCode)))
                 {
                     return new Result { ResCode = ResCodeOptions.Error, Message = SR.M_InvalidError };
                 }
 
-                var oldMainOrderInfo = await _orderService.DoMainOrderInfoAsync(tokenInfo.AppId, tokenInfo.UserId, userInfo.UserName, userOrderStatus, orderCode, parentOrderCode,remark, pictures, latlng, latlngPlace, ip, ipPlace);
+                var oldMainOrderInfo = await _orderService.DoMainOrderInfoAsync(tokenInfo.AppId, tokenInfo.UserId, userInfo.UserName, userOrderStatus, orderCode, parentOrderCode, remark, batchRandomCode, pictures, latlng, latlngPlace, ip, ipPlace);
                 var isMainOrderChanged = false;
 
                 if (requestInfo.FunFlag == FunFlagOptions.Orders.ToString())
                 {
                     if (!string.IsNullOrEmpty(parentOrderCode))
                     {
-                        if (!oldMainOrderInfo.AddItems.Any(m => m.OrderCode == orderCode && m.ByUserId == tokenInfo.UserId))
+                        //对于每次订单扫描提交，每个用户的BatchRandomCode是唯一的
+                        var currentBatchItem = oldMainOrderInfo.TransferItems.FirstOrDefault(m => m.BatchRandomCode == batchRandomCode);
+                        if (currentBatchItem != null)
                         {
-                            var siblings = oldMainOrderInfo.AddItems.ToList();
-                            siblings.Add(new OrderAddItemInfo { ByUserId = userInfo.UserId, ByUserName = userInfo.UserName, OrderCode = orderCode, OrderStatus = userOrderStatus, Latlng = latlng, LatlngPlace = latlngPlace, Ip = ip, IpPlace = ipPlace });
-                            oldMainOrderInfo.AddItems = siblings;
+                            var addItems = currentBatchItem.AddItems.ToList();
+                            addItems.Add(orderCode);
+                            currentBatchItem.AddItems = addItems;
+
                             isMainOrderChanged = true;
                         }
                     }

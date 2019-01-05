@@ -12,14 +12,12 @@ namespace TygaSoft.Model
             .ForMember(d => d.Id, opt => opt.MapFrom(o => o.OrderId))
             .ForMember(d => d.ApplicationId, opt => opt.MapFrom(o => o.AppId))
             .ForMember(d => d.TransferItems, opt => opt.Ignore())
-            .ForMember(d => d.AddItems, opt => opt.Ignore())
             ;
 
              CreateMap<DbTables.OrdersInfo,OrderInfo>()
             .ForMember(d => d.OrderId, opt => opt.MapFrom(o => o.Id))
             .ForMember(d => d.AppId, opt => opt.MapFrom(o => o.ApplicationId))
             .ForMember(d => d.TransferItems, opt => opt.Ignore())
-            .ForMember(d => d.AddItems, opt => opt.Ignore())
             ;
 
             CreateMap<UserInfo, DbTables.UsersInfo>()

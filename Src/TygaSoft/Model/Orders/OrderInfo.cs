@@ -11,7 +11,7 @@ namespace TygaSoft.Model
         public string OrderCode { get; set; }
         public string ParentOrderCode { get; set; }
         public IEnumerable<OrderTransferInfo> TransferItems{get;set;}
-        public IEnumerable<OrderAddItemInfo> AddItems{get;set;}
+        // public IEnumerable<OrderAddItemInfo> AddItems{get;set;}
         public DateTime CreatedDate { get; set; }
         public DateTime LastUpdatedDate { get; set; }
         

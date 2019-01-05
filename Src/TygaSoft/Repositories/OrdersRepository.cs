@@ -54,7 +54,7 @@ namespace TygaSoft.Repositories
             oldInfo.OrderCode = model.OrderCode;
             oldInfo.ParentOrderCode = model.ParentOrderCode;
             oldInfo.TransferItems = model.TransferItems;
-            oldInfo.AddItems = model.AddItems;
+            //oldInfo.AddItems = model.AddItems;
 
             // _context.Orders.Remove(model);
             // await _context.Orders.AddAsync(model);
