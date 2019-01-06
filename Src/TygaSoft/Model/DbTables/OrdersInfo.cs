@@ -9,6 +9,7 @@ namespace TygaSoft.Model.DbTables
         public string UserId { get; set; }
         public string OrderCode { get; set; }
         public string ParentOrderCode { get; set; }
+        public OrderStatusOptions Status { get; set; }
 
         //对应IEnumerable<OrderTransferInfo> TransferItems
         public string TransferItems { get; set; }

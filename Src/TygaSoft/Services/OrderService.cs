@@ -25,6 +25,37 @@ namespace TygaSoft.Services
             _dtoMapper = dtoMapper;
         }
 
+        public async Task DoOrderBack(int appId, string userId, string orderCode)
+        {
+            var userLatestRecords = await _ordersRepository.FindUserLatestRecordsAsync(appId, userId);
+            if (userLatestRecords == null || !userLatestRecords.Any()) return;
+
+            foreach (var item in userLatestRecords)
+            {
+                if (item.OrderCode == orderCode)
+                {
+                    await _ordersRepository.DeleteAsync(appId, orderCode);
+                    return;
+                }
+                var orderInfo = DtoOrderInfo(item);
+                var transferItems = orderInfo.TransferItems.OrderByDescending(m => m.LastUpdatedTime);
+                foreach (var transfer in transferItems)
+                {
+                    var addItems = transfer.AddItems.ToList();
+                    if (addItems.Any(m => m == orderCode))
+                    {
+                        addItems.RemoveAll(m => m == orderCode);
+                        transfer.AddItems = addItems;
+
+                        await _ordersRepository.UpdateAsync(OtdOrderInfo(orderInfo));
+
+                        return;
+                    }
+
+                }
+            }
+        }
+
         public async Task<OrderInfo> DoMainOrderInfoAsync(int appId, string userId, string userName, OrderStatusOptions userOrderStatus, string orderCode, string parentOrderCode, string remark, string batchRandomCode, IEnumerable<string> pictures, string latlng, string latlngPlace, string ip, string ipPlace)
         {
             //OrderInfo mainOrderInfo = null;
@@ -32,9 +63,8 @@ namespace TygaSoft.Services
 
             var mainOrderCode = string.IsNullOrEmpty(parentOrderCode) ? orderCode : parentOrderCode;
             var oldMainOrderInfo = await GetOrderInfoAsync(appId, mainOrderCode);
-            if (oldMainOrderInfo == null)
-            {
-                var transferItems = new List<OrderTransferInfo>{
+
+            var transferItems = new List<OrderTransferInfo>{
                     new OrderTransferInfo
                         {
                             ByUserId = userId,
@@ -52,6 +82,8 @@ namespace TygaSoft.Services
                         }
                 };
 
+            if (oldMainOrderInfo == null)
+            {
                 oldMainOrderInfo = new OrderInfo
                 {
                     AppId = appId,
@@ -62,75 +94,17 @@ namespace TygaSoft.Services
 
                 isChanged = true;
             }
-
-            // var transferInfo = new OrderTransferInfo
-            // {
-            //     ByUserId = userId,
-            //     ByUserName = userName,
-            //     Remark = remark,
-            //     OrderStatus = userOrderStatus,
-            //     BatchRandomCode = batchRandomCode,
-            //     Pictures = pictures == null ? new List<string>() : pictures,
-            //     AddItems = new List<string>(),
-            //     Latlng = latlng,
-            //     LatlngPlace = latlngPlace,
-            //     Ip = ip,
-            //     IpPlace = ipPlace,
-            //     LastUpdatedTime = DateTime.Now
-            // };
-
-            //var transferItems = new List<OrderTransferInfo>();
-
-            //程序应优先保存主订单号
-            // if (string.IsNullOrEmpty(parentOrderCode))
-            // {
-            //     mainOrderInfo = await GetOrderInfoAsync(appId, orderCode);
-            //     if (mainOrderInfo == null)
-            //     {
-            //         transferItems.Add(transferInfo);
-            //         mainOrderInfo = new OrderInfo
-            //         {
-            //             AppId = appId,
-            //             UserId = userId,
-            //             OrderCode = orderCode,
-            //             TransferItems = transferItems
-            //         };
-
-            //         //isChanged = true;
-            //     }
-            //     // else
-            //     // {
-            //     //     if (!mainOrderInfo.TransferItems.Any(m => m.OrderStatus == userOrderStatus && m.ByUserId == userId))
-            //     //     {
-            //     //         transferItems.Add(transferInfo);
-            //     //         isChanged = true;
-            //     //     }
-            //     // }
-            // }
-            // else
-            // {
-            //     mainOrderInfo = await GetOrderInfoAsync(appId, parentOrderCode);
-            //     if (mainOrderInfo == null)
-            //     {
-            //         throw new ArgumentException(SR.M_InvalidError);
-            //     }
-            //     // //对于每次订单扫描提交，每个用户的BatchRandomCode是唯一的
-            //     // var currentBatchItem = mainOrderInfo.TransferItems.FirstOrDefault(m => m.BatchRandomCode==batchRandomCode);
-            //     // if (currentBatchItem != null)
-            //     // {
-            //     //     var addItems = transferInfo.AddItems.ToList();
-            //     //     addItems.Add(orderCode);
-            //     //     currentBatchItem.AddItems = addItems;
-
-            //     //     isChanged = true;
-            //     // }
-            //     // else{
-            //     //     transferItems.Add(transferInfo);
-            //     //     mainOrderInfo.TransferItems = transferItems;
-
-            //     //     isChanged = true;
-            //     // }
-            // }
+            else
+            {
+                var currentBatchItem = oldMainOrderInfo.TransferItems.FirstOrDefault(m => m.BatchRandomCode == batchRandomCode && m.ByUserId == userId);
+                if (currentBatchItem == null)
+                {
+                    var oldTransferItems = oldMainOrderInfo.TransferItems.ToList();
+                    oldTransferItems.AddRange(transferItems);
+                    oldMainOrderInfo.TransferItems = oldTransferItems;
+                    isChanged = true;
+                }
+            }
 
             if (isChanged) await SaveOrderAsync(oldMainOrderInfo);
 
@@ -272,7 +246,7 @@ namespace TygaSoft.Services
         {
             var orderInfo = _dtoMapper.TMapper<OrderInfo>(d);
             orderInfo.TransferItems = JsonConvert.DeserializeObject<IEnumerable<OrderTransferInfo>>(d.TransferItems);
-            
+
             return orderInfo;
         }
 

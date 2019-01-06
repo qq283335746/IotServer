@@ -7,6 +7,7 @@ namespace TygaSoft.IRepositories
 {
     public interface IOrdersRepository
     {
+        Task<IEnumerable<OrdersInfo>> FindUserLatestRecordsAsync(int applicationId, string userId);
         Task<IEnumerable<OrdersInfo>> FindOrderRouterAsync(string orderCode);
         Task<OrdersInfo> GetOrderInfoAsync(int applicationId, string orderCode);
         Task<int> DeleteAsync(int applicationId, string orderCode);

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TygaSoft.IRepositories;
+using TygaSoft.Model;
 using TygaSoft.Model.DbTables;
 
 namespace TygaSoft.Repositories
@@ -15,6 +16,11 @@ namespace TygaSoft.Repositories
         public OrdersRepository(SqliteContext context)
         {
             _context = context;
+        }
+
+        public async Task<IEnumerable<OrdersInfo>> FindUserLatestRecordsAsync(int applicationId, string userId)
+        {
+            return await _context.Orders.Where(m=>m.ApplicationId == applicationId && m.UserId == userId && m.Status != OrderStatusOptions.End).OrderByDescending(m=>m.LastUpdatedDate).ToListAsync();
         }
 
         public async Task<IEnumerable<OrdersInfo>> FindOrderRouterAsync(string orderCode)

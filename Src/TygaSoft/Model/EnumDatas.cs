@@ -4,7 +4,8 @@ namespace TygaSoft.Model
     {
         None,
         Orders,
-        OrderPackages
+        OrderPackages,
+        OrderBack
     }
 
     public enum OrderStatusOptions
@@ -12,7 +13,7 @@ namespace TygaSoft.Model
         None,
         Send,
         Package,
-        End
+        End=99
     }
 
     public enum OrderRoleOptions

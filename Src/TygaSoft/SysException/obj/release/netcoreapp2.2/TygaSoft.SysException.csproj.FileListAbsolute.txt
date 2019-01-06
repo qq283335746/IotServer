@@ -1,0 +1,8 @@
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/SysException/bin/release/netcoreapp2.2/TygaSoft.SysException.deps.json
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/SysException/bin/release/netcoreapp2.2/TygaSoft.SysException.dll
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/SysException/bin/release/netcoreapp2.2/TygaSoft.SysException.pdb
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/SysException/obj/release/netcoreapp2.2/TygaSoft.SysException.csproj.CoreCompileInputs.cache
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/SysException/obj/release/netcoreapp2.2/TygaSoft.SysException.AssemblyInfoInputs.cache
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/SysException/obj/release/netcoreapp2.2/TygaSoft.SysException.AssemblyInfo.cs
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/SysException/obj/release/netcoreapp2.2/TygaSoft.SysException.dll
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft/SysException/obj/release/netcoreapp2.2/TygaSoft.SysException.pdb

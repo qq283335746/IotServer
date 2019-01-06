@@ -96,16 +96,6 @@ namespace TygaSoft.Api.Controllers
                 {
                     return new Result { ResCode = ResCodeOptions.TokenInvalidError, Message = SR.M_LoginRedirect };
                 }
-                var userOrderStatus = _orderService.GetOrderStatus(userInfo.Roles);
-                if (userOrderStatus == OrderStatusOptions.None)
-                {
-                    return new Result { ResCode = ResCodeOptions.Error, Message = SR.M_LoginUserNoAccess };
-                }
-
-                // var exchanges = new OrderAddItemInfo
-                // {
-                //     OrderStatus = userOrderStatus
-                // };
 
                 string orderCode = string.Empty;
                 string parentOrderCode = string.Empty;
@@ -115,15 +105,25 @@ namespace TygaSoft.Api.Controllers
                 string latlngPlace = string.Empty;
                 string ip = string.Empty;
                 string ipPlace = string.Empty;
-                IEnumerable<string> pictures = null;    //待处理
+                IEnumerable<string> pictures = null;
 
-                if (requestInfo.FunFlag == FunFlagOptions.Orders.ToString() || requestInfo.FunFlag == FunFlagOptions.OrderPackages.ToString())
+                if (requestInfo.FunFlag == FunFlagOptions.OrderBack.ToString())
                 {
-                    var jobj = JObject.Parse(requestInfo.Data);
-                    orderCode = jobj["OrderCode"].ToString();
-                    parentOrderCode = jobj.ContainsKey("ParentOrderCode") ? jobj["ParentOrderCode"].ToString():string.Empty;
-                    remark = jobj.ContainsKey("Remark") ? jobj["Remark"].ToString():string.Empty;
-                    batchRandomCode = jobj.ContainsKey("BatchRandomCode") ? jobj["BatchRandomCode"].ToString():string.Empty;
+                    orderCode = requestInfo.Data;
+                    await _orderService.DoOrderBack(tokenInfo.AppId, tokenInfo.UserId, orderCode);
+                    return new Result { ResCode = ResCodeOptions.Success, Message = SR.Response_Ok };
+                }
+
+                var jobj = JObject.Parse(requestInfo.Data);
+                orderCode = jobj.ContainsKey("OrderCode") ? jobj["OrderCode"].ToString() : string.Empty;
+                parentOrderCode = jobj.ContainsKey("ParentOrderCode") ? jobj["ParentOrderCode"].ToString() : string.Empty;
+                remark = jobj.ContainsKey("Remark") ? jobj["Remark"].ToString() : string.Empty;
+                batchRandomCode = jobj.ContainsKey("BatchRandomCode") ? jobj["BatchRandomCode"].ToString() : string.Empty;
+
+                var userOrderStatus = _orderService.GetOrderStatus(userInfo.Roles);
+                if (userOrderStatus == OrderStatusOptions.None)
+                {
+                    return new Result { ResCode = ResCodeOptions.Error, Message = SR.M_LoginUserNoAccess };
                 }
 
                 if (string.IsNullOrEmpty(batchRandomCode) || (string.IsNullOrEmpty(orderCode) && string.IsNullOrEmpty(parentOrderCode)))
@@ -136,17 +136,20 @@ namespace TygaSoft.Api.Controllers
 
                 if (requestInfo.FunFlag == FunFlagOptions.Orders.ToString())
                 {
+                    //对于每次订单扫描提交，每个用户的BatchRandomCode是唯一的
+                    var currentBatchItem = oldMainOrderInfo.TransferItems.FirstOrDefault(m => m.BatchRandomCode == batchRandomCode && m.ByUserId == userInfo.UserId);
                     if (!string.IsNullOrEmpty(parentOrderCode))
                     {
-                        //对于每次订单扫描提交，每个用户的BatchRandomCode是唯一的
-                        var currentBatchItem = oldMainOrderInfo.TransferItems.FirstOrDefault(m => m.BatchRandomCode == batchRandomCode);
                         if (currentBatchItem != null)
                         {
                             var addItems = currentBatchItem.AddItems.ToList();
-                            addItems.Add(orderCode);
-                            currentBatchItem.AddItems = addItems;
+                            if (!addItems.Contains(orderCode))
+                            {
+                                addItems.Add(orderCode);
+                                currentBatchItem.AddItems = addItems;
 
-                            isMainOrderChanged = true;
+                                isMainOrderChanged = true;
+                            }
                         }
                     }
                 }
