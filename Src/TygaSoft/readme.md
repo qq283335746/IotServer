@@ -1,6 +1,6 @@
 
 Source Local Dir:
-/home/tygasoft/Tyga/GitHub/IotServer
+/home/tygasoft/Tyga/GitHub/IotServer/Src/TygaSoft
 /home/tygasoft/Tyga/GitHub/IotClient
 
 .net core 部署：

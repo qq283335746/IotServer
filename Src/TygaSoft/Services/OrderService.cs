@@ -89,6 +89,7 @@ namespace TygaSoft.Services
                     AppId = appId,
                     UserId = userId,
                     OrderCode = orderCode,
+                    Status = userOrderStatus,
                     TransferItems = transferItems
                 };
 
